@@ -1,0 +1,32 @@
+﻿@model Backend4.Models.SignUpCredentialsModel
+@{
+    ViewBag.Title = "Sign up";
+}
+
+<h2>Sign up result</h2>
+
+<div class="dl-horizontal">
+    <div style="font-weight:bold">First name</div>
+    <div>@Model.FirstName</div>
+
+    <div style="font-weight:bold">Last name</div>
+    <div>@Model.LastName</div>
+
+    <div style="font-weight:bold">Birthday</div>
+    <div>@Model.Month @Model.Day, @Model.Year</div>
+
+    <div style="font-weight:bold">Gender</div>
+    <div>@Model.Gender</div>
+
+    <div style="font-weight:bold">E-mail</div>
+    <div>@Model.Email</div>
+
+    <div style="font-weight:bold">Password</div>
+    <div>@Model.Password</div>
+
+    <div style="font-weight:bold">Existed</div>
+    <div>@Model.Existed</div>
+
+    <div style="font-weight:bold">Remembered</div>
+    <div>@Model.Remembered</div>
+</div>

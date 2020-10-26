@@ -1,0 +1,12 @@
+﻿@model dynamic
+@{
+    ViewData["Title"] = "Pass using ViewData";
+}
+
+<h2>Calculation via ViewData</h2>
+<ul class="dl-horizontal">
+    <li>@ViewData["FirstInt"] + @ViewData["SecondInt"] = @ViewData["AdditionResult"]</li>
+    <li>@ViewData["FirstInt"] - @ViewData["SecondInt"] = @ViewData["SubtractionResult"]</li>
+    <li>@ViewData["FirstInt"] * @ViewData["SecondInt"] = @ViewData["MultiplicationResult"]</li>
+    <li>@ViewData["FirstInt"] / @ViewData["SecondInt"] = @ViewData["DivisionResult"]</li>
+</ul>

@@ -1,0 +1,12 @@
+﻿@model dynamic
+@{
+    ViewBag.Title = "Pass using ViewBag";
+}
+
+<h2>Calculation via ViewBag</h2>
+<ul class="dl-horizontal">
+    <li>@ViewBag.FirstInt + @ViewBag.SecondInt = @ViewBag.AdditionResult</li>
+    <li>@ViewBag.FirstInt - @ViewBag.SecondInt = @ViewBag.SubtractionResult</li>
+    <li>@ViewBag.FirstInt * @ViewBag.SecondInt = @ViewBag.MultiplicationResult</li>
+    <li>@ViewBag.FirstInt / @ViewBag.SecondInt = @ViewBag.DivisionResult</li>
+</ul>

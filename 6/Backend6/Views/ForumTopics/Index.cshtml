@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Backend6.Models.ForumTopic>
+@{
+    ViewBag.Title = "Forum";
+}
+
+<h2>@ViewBag.Forum.Name</h2>
+<p>@ViewBag.Forum.Description</p>
+
+@if (User.Identity.IsAuthenticated)
+{
+    <p>
+        <a asp-action="Create" asp-route-forumId="@ViewBag.Forum.Id">Create new topic</a>
+    </p>
+}
+
+<div class="panel panel-default">
+    <table class="table table-striped">
+        <tbody>
+            @foreach (var item in Model.OrderByDescending(x => x.Created))
+            {
+                <tr>
+                    <td>
+                        <a asp-action="Index" asp-controller="ForumMessages" asp-route-topicId="@item.Id" style="font-size: 1.3em">@item.Name</a><br />
+                        @item.User.UserName, @item.Created
+                    </td>
+                    <td style="width: 100px">
+                        @item.Messages.Count replies
+                    </td>
+                    <td style="width: 220px">
+                        @if (item.Messages.Count > 0)
+                        {
+                            <span>
+                                @item.Messages.ToList()[0].User.UserName<br />
+                                @item.Messages.ToList()[0].Created
+                            </span>
+                        }
+                        else
+                        {
+                            <span>
+                                No messages
+                            </span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

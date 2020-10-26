@@ -1,0 +1,108 @@
+﻿@model Backend4.Models.SignUpModel
+@{
+    ViewBag.Title = "Sign up";
+
+    var dayMin = 1;
+    var dayMax = 31;
+
+    var months = new List<String>() {
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+    };
+
+    var yearLast = 2020;
+    var yearFirst = 1920;
+}
+
+<h2>Sign up</h2>
+
+<form asp-action="SignUp" class="form-horizontal">
+    <div class="form-group">
+        <label class="col-md-2 control-label">First name</label>
+
+        <div class="col-md-10">
+            <input asp-for="@Model.FirstName" type="text" class="form-control" />
+            <span asp-validation-for="@Model.FirstName"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-2 control-label">Last name</label>
+
+        <div class="col-md-10">
+            <input asp-for="@Model.LastName" type="text" class="form-control" />
+            <span asp-validation-for="@Model.LastName"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-2 control-label">Birthday</label>
+
+        <div class="col-md-10 form-inline">
+            <select asp-for="@Model.Day" class="form-control">
+                <option disabled="disabled">Day</option>
+
+                @for (var curDay = dayMin; curDay <= dayMax; curDay++)
+                {
+                    <option>@curDay</option>
+                }
+            </select>
+
+            <select asp-for="@Model.Month" class="form-control">
+                <option disabled="disabled">Month</option>
+
+                @foreach (var curMonth in months)
+                {
+                    <option>@curMonth</option>
+                }
+            </select>
+
+            <select asp-for="@Model.Year" class="form-control">
+                <option disabled="disabled">Year</option>
+
+                @for (var curYear = yearLast; curYear >= yearFirst; curYear--)
+                {
+                    <option>@curYear</option>
+                }
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="@Model.Gender" class="col-md-2 control-label">Gender</label>
+
+        <div class="col-md-10">
+            <div class="radio">
+                <label>
+                    <input asp-for="@Model.Gender" name="Gender" type="radio" value="Male" />
+                    Male
+                </label>
+            </div>
+
+            <div class="radio">
+                <label>
+                    <input asp-for="@Model.Gender" name="Gender" type="radio" value="Female" />
+                    Female
+                </label>
+            </div>
+        </div>
+
+        <span asp-validation-for="@Model.Gender"></span>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-10 col-md-offset-2">
+            <button type="submit" class="btn btn-primary">Sign up</button>
+        </div>
+    </div>
+</form>

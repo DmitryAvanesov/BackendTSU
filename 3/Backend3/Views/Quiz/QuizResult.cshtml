@@ -1,0 +1,26 @@
+﻿@model Backend3.Models.QuizModel
+@{
+    ViewBag.Title = "Quiz results";
+}
+
+<h2>Quiz results</h2>
+
+<p>
+    <strong>Correct answers: </strong> @Model.Expressions.Count(exp => exp.Correct) / @Model.Expressions.Count
+</p>
+
+<p>
+    <ol>
+        @foreach (var expression in Model.Expressions)
+        {
+            @if (expression.Correct)
+            {
+                <li>@expression.FirstInt @expression.ArithmeticOperator @expression.SecondInt = @expression.Result</li>
+            }
+            else
+            {
+                <li class="validation-summary-errors">@expression.FirstInt @expression.ArithmeticOperator @expression.SecondInt = @expression.Result</li>
+            }
+        }
+    </ol>
+</p>

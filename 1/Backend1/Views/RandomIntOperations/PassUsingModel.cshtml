@@ -1,0 +1,12 @@
+﻿@model Backend1.Models.RandomIntOperationsViewModel
+@{
+    ViewBag.Title = "Pass using Model";
+}
+
+<h2>Calculation via Model</h2>
+<ul class="dl-horizontal">
+    <li>@Model.FirstInt + @Model.SecondInt = @Model.AdditionResult</li>
+    <li>@Model.FirstInt - @Model.SecondInt = @Model.SubtractionResult</li>
+    <li>@Model.FirstInt * @Model.SecondInt = @Model.MultiplicationResult</li>
+    <li>@Model.FirstInt / @Model.SecondInt = @Model.DivisionResult</li>
+</ul>

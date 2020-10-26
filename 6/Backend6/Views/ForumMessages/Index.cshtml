@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Backend6.Models.ForumMessage>
+@{
+    ViewBag.Title = "Topic";
+}
+@using Backend6.Services
+@inject IUserPermissionsService UserPermissions
+
+<h2>@ViewBag.Topic.Name</h2>
+@if (User.Identity.IsAuthenticated)
+{
+    <p>
+        <a asp-action="Create" asp-route-topicId="@ViewBag.Topic.Id">Reply</a>
+        | <a asp-action="Edit" asp-controller="ForumTopics" asp-route-id="@ViewBag.Topic.Id">Edit</a>
+        | <a asp-action="Delete" asp-controller="ForumTopics" asp-route-id="@ViewBag.Topic.Id">Delete</a>
+        | <a asp-action="Index" asp-controller="ForumTopics" asp-route-forumId="@ViewBag.Forum.Id">Back to @ViewBag.Forum.Name</a>
+    </p>
+}
+
+@foreach (var messageItem in Model.OrderByDescending(x => x.Created))
+{
+    var canEditMessage = UserPermissions.CanEditMessage(messageItem);
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <div>
+                @messageItem.User.UserName, @messageItem.Created (edited @messageItem.Modified)
+                @if (canEditMessage)
+                {
+                    <span>
+                        | <a asp-action="Edit" asp-route-id="@messageItem.Id">Edit</a>
+                        | <a asp-action="Delete" asp-route-id="@messageItem.Id">Delete</a>
+                        | <a asp-action="Create" asp-controller="ForumMessageAttachments" asp-route-messageId="@messageItem.Id">Attach</a>
+                    </span>
+                }
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="forum-message-text">@messageItem.Text</div>
+            <div class="row">
+                @foreach (var attachmentIem in messageItem.Attachments.OrderByDescending(x => x.Created))
+                {
+                    <div class="col-sm-6 col-md-4">
+                        <div class="thumbnail">
+                            <img src="@attachmentIem.FilePath" alt="Image" />
+                            @if (canEditMessage)
+                            {
+                                <div class="caption">
+                                    <p><a asp-action="Delete" asp-controller="ForumMessageAttachments" asp-route-id="@attachmentIem.Id" class="btn btn-danger">Delete</a></p>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+}
