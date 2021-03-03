@@ -1,0 +1,128 @@
+﻿@model BackendTest1.Models.LoadGameViewModel
+@{
+    ViewBag.Title = "Saved games";
+}
+
+<form asp-controller="Civilization">
+    <div class="row">
+        <div class="col-xs-12">
+            <h1>Game 1</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 col-sm-4">
+            <ul class="nav nav-pills nav-stacked game-nav">
+                @for (var i = 0; i < Model.NumberOfGames; i++)
+                {
+                    <li>
+                        <button asp-action="LoadGame" asp-route-showIndex=@i type="submit" class="@(Model.ChosenGame == i ? "btn btn-primary" : "btn btn-default")">Game @(i + 1)</button>
+                    </li>
+                }
+            </ul>
+        </div>
+
+        @if (Model.ChosenGame != null)
+        {
+            <div class="col-md-9 col-sm-8 form-horizontal">
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <label class="control-label">Name</label>
+                    </div>
+                    <div class="col-md-9">
+                        <p class="form-control-static">@Model.Name</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <label class="control-label">Civilization</label>
+                    </div>
+                    <div class="col-md-9">
+                        @if (Model.Civilization == null)
+                        {
+                            <p class="form-control-static">Random Civilization</p>
+                        }
+                        else
+                        {
+                            <p class="form-control-static">@Model.Civilization.Name - @Model.Civilization.Leader</p>
+                        }
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <label class="control-label">Opponents</label>
+                    </div>
+                    <div class="col-md-9">
+                        <p class="form-control-static">
+                            @foreach (var opponent in Model.Opponents)
+                            {
+                                @if (opponent == null)
+                                {
+                                    <span>Random Civilization</span><br />
+                                }
+                                else
+                                {
+                                    <span>@opponent.Name - @opponent.Leader</span><br />
+                                }
+                            }
+                        </p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <label class="control-label">Map type</label>
+                    </div>
+                    <div class="col-md-9">
+                        <p class="form-control-static">@Model.MapType.Name</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <label class="control-label">Map size</label>
+                    </div>
+                    <div class="col-md-9">
+                        <p class="form-control-static">@Model.MapSize.Name (@Model.MapSize.MaxCivilizations)</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <label class="control-label">Difficulty</label>
+                    </div>
+                    <div class="col-md-9">
+                        <p class="form-control-static">@Model.Difficulty.Name - @Model.Difficulty.Type</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <label class="control-label">Victory types</label>
+                    </div>
+                    <div class="col-md-9">
+                        <p class="form-control-static">
+                            @foreach (var type in Model.VictoryTypes)
+                            {
+                                @if (type != null)
+                                {
+                                    <span>@type.Name</span><br />
+                                }
+                            }
+                        </p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <label class="control-label">Advanced game options</label>
+                    </div>
+                    <div class="col-md-9">
+                        <p class="form-control-static">
+                            @foreach (var option in Model.AdvancedGameOptions)
+                            {
+                                <span>@option</span><br />
+                            }
+                        </p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    <input type="hidden" asp-for="@Model.NumberOfGames" value="@Model.NumberOfGames" />
+</form>

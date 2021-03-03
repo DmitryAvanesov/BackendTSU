@@ -1,0 +1,130 @@
+﻿@model dynamic
+@{
+    ViewBag.Title = "Set Up Game";
+}
+
+<div class="row">
+    <div class="col-xs-12">
+        <h1>Set Up Game</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3 col-sm-4">
+        <ul class="nav nav-pills nav-stacked game-nav">
+            <li>
+                <button class="btn btn-default">
+                    Your civilization<br />
+                    American - Washington
+                </button>
+            </li>
+            <li>
+                <button class="btn btn-default">
+                    Opponents<br />
+                    3 opponents
+                </button>
+            </li>
+            <li>
+                <button class="btn btn-primary">
+                    Basic settings<br />
+                    Small Easy Pangaea
+                </button>
+            </li>
+            <li>
+                <button class="btn btn-default">
+                    Advanced settings
+                </button>
+            </li>
+            <li>
+                <button class="btn btn-success">
+                    Start
+                </button>
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-9 col-sm-8 form-horizontal">
+        <div class="form-group">
+            <div class="col-md-3">
+                <label class="control-label">Map type</label>
+            </div>
+            <div class="col-md-9">
+                <div class="radio">
+                    <label><input type="radio" name="MapType">Archipelago</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" name="MapType">Continents</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" name="MapType">Earth</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" name="MapType">Hemispheres</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" name="MapType">Islands</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" name="MapType">Lakes</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" checked="checked" name="MapType">Pangaea</label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-3">
+                <label class="control-label">Map size</label>
+            </div>
+            <div class="col-md-9">
+                <div class="radio">
+                    <label><input type="radio" name="MapSize">Duel (2 civilizations)</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" name="MapSize">Tiny (4 civilizations)</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" checked="checked" name="MapSize">Small (6 civilizations)</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" name="MapSize">Standard (8 civilizations)</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" name="MapSize">Large (10 civilizations)</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" name="MapSize">Huge (12 civilizations)</label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-3">
+                <label class="control-label">Difficulty</label>
+            </div>
+            <div class="col-md-9">
+                <div class="radio">
+                    <label><input type="radio" name="Difficulty">Settler - Easiest</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" name="Difficulty">Chieftain - Very easy</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" checked="checked" name="Difficulty">Warlord - Easy</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" name="Difficulty">Prince - Normal</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" name="Difficulty">King - Hard</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" name="Difficulty">Emperor - Very hard</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" name="Difficulty">Immortal - Extremely hard</label>
+                </div>
+                <div class="radio">
+                    <label><input type="radio" name="Difficulty">Deity - Hardest</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

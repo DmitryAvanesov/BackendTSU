@@ -1,0 +1,84 @@
+﻿@model dynamic
+@{
+    ViewBag.Title = "Set Up Game";
+}
+
+<div class="row">
+    <div class="col-xs-12">
+        <h1>Set Up Game</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3 col-sm-4">
+        <ul class="nav nav-pills nav-stacked game-nav">
+            <li>
+                <button class="btn btn-default">
+                    Your civilization<br />
+                    American - Washington
+                </button>
+            </li>
+            <li>
+                <button class="btn btn-default">
+                    Opponents<br />
+                    3 opponents
+                </button>
+            </li>
+            <li>
+                <button class="btn btn-default">
+                    Basic settings<br />
+                    Small Easy Pangaea
+                </button>
+            </li>
+            <li>
+                <button class="btn btn-primary">
+                    Advanced settings
+                </button>
+            </li>
+            <li>
+                <button class="btn btn-success">
+                    Start
+                </button>
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-9 col-sm-8 form-horizontal">
+        <div class="form-group">
+            <div class="col-md-3">
+                <label class="control-label">Victory types</label>
+            </div>
+            <div class="col-md-9">
+                <div class="checkbox">
+                    <label><input type="checkbox">Time</label>
+                </div>
+                <div class="checkbox">
+                    <label><input type="checkbox" checked="checked">Science</label>
+                </div>
+                <div class="checkbox">
+                    <label><input type="checkbox" checked="checked">Domination</label>
+                </div>
+                <div class="checkbox">
+                    <label><input type="checkbox" checked="checked">Cultural</label>
+                </div>
+                <div class="checkbox">
+                    <label><input type="checkbox" checked="checked">Diplomatic</label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-3">
+                <label class="control-label">Advanced game options</label>
+            </div>
+            <div class="col-md-9">
+                <div class="checkbox">
+                    <label><input type="checkbox" checked="checked" />Max Turns</label>
+                </div>
+                <div class="checkbox">
+                    <label><input type="checkbox" checked="checked" />Complete Kills</label>
+                </div>
+                <div class="checkbox">
+                    <label><input type="checkbox" />Once-City Challenge</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,82 @@
+﻿@model dynamic
+@{
+    ViewBag.Title = "Set Up Game";
+}
+
+<div class="row">
+    <div class="col-xs-12">
+        <h1>Set Up Game</h1>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3 col-sm-4">
+        <ul class="nav nav-pills nav-stacked game-nav">
+            <li>
+                <button class="btn btn-primary">
+                    Your civilization<br />
+                    American - Washington
+                </button>
+            </li>
+            <li>
+                <button class="btn btn-default">
+                    Opponents<br />
+                    3 opponents
+                </button>
+            </li>
+            <li>
+                <button class="btn btn-default">
+                    Basic settings<br />
+                    Small Easy Pangaea
+                </button>
+            </li>
+            <li>
+                <button class="btn btn-default">
+                    Advanced settings
+                </button>
+            </li>
+            <li>
+                <button class="btn btn-success">
+                    Start
+                </button>
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-9 col-sm-8 form-horizontal">
+        <div class="form-group">
+            <div class="col-md-3">
+                <label class="control-label">Name</label>
+            </div>
+            <div class="col-md-9">
+                <input type="text" class="form-control" value="Player" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-3">
+                <label class="control-label">Civilization</label>
+            </div>
+            <div class="col-md-9">
+                <select class="form-control">
+                    <option>Random civilization</option>
+                    <option selected="selected">American (Washington)</option>
+                    <option>Arabian (Harun al-Rashid)</option>
+                    <option>Aztec (Montezuma)</option>
+                    <option>Chinese (Wu Zetian)</option>
+                    <option>Egyptian (Ramesses II)</option>
+                    <option>English (Elizabeth)</option>
+                    <option>French (Napoleon)</option>
+                    <option>German (Bismarck)</option>
+                    <option>Greek (Alexander)</option>
+                    <option>Indian (Gandhi)</option>
+                    <option>Iroquois (Hiawatha)</option>
+                    <option>Japanese (Oda Nobunaga)</option>
+                    <option>Ottoman (Suleiman)</option>
+                    <option>Persian (Darius I)</option>
+                    <option>Roman (Augustus Caesar)</option>
+                    <option>Russian (Catherine)</option>
+                    <option>Siamese (Ramkhamhaeng)</option>
+                    <option>Songhai (Askia)</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,275 @@
+﻿@model BackendTest1.Models.SetUpGameViewModel
+@{
+    ViewBag.Title = "Set Up Game";
+}
+@using BackendTest1.Services
+@inject ICivilizationDataProviderService CivilizationDataProviderService
+@inject IMapTypeDataProviderService MapTypeDataProviderService
+@inject IMapSizeDataProviderService MapSizeDataProviderService
+@inject IDifficultyDataProviderService DifficultyDataProviderService
+
+<form asp-controller="SetUpGame">
+    <div class="row">
+        <div class="col-xs-12">
+            <h1>Set Up Game</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 col-sm-4">
+            <ul class="nav nav-pills nav-stacked game-nav">
+                <li>
+                    <button asp-action="SetUpGame" type="submit" name="Action" value="Civilization" class="@(Model.ChosenTab == "Civilization" ? "btn btn-primary" : "btn btn-default")">
+                        Your civilization<br />
+                        @if (Model.ChosenCivilization == null)
+                        {
+                            <span>Random Civilization</span>
+                        }
+                        else
+                        {
+                            var civilization = @CivilizationDataProviderService.FindEntity((Int32)Model.ChosenCivilization);
+                            <span>@civilization.Name - @civilization.Leader</span>
+                        }
+                    </button>
+                </li>
+                <li>
+                    <button asp-action="SetUpGame" type="submit" name="Action" value="Opponents" class="@(Model.ChosenTab == "Opponents" ? "btn btn-primary" : "btn btn-default")">
+                        Opponents<br />
+                        @Model.ChosenOpponents.Count opponents
+                    </button>
+                </li>
+                <li>
+                    <button asp-action="SetUpGame" type="submit" name="Action" value="BasicSettings" class="@(Model.ChosenTab == "BasicSettings" ? "btn btn-primary" : "btn btn-default")">
+                        Basic settings<br />
+                        @MapTypeDataProviderService.FindEntity(Model.ChosenMapType).Name @MapSizeDataProviderService.FindEntity(Model.ChosenMapSize).Name @DifficultyDataProviderService.FindEntity(Model.ChosenDifficulty).Name
+                    </button>
+                </li>
+                <li>
+                    <button asp-action="SetUpGame" type="submit" name="Action" value="AdvancedSettings" class="@(Model.ChosenTab == "AdvancedSettings" ? "btn btn-primary" : "btn btn-default")">
+                        Advanced settings
+                    </button>
+                </li>
+                <li>
+                    <button asp-action="SetUpGame" type="submit" name="Action" value="Start" class="btn btn-success">
+                        Start
+                    </button>
+                </li>
+            </ul>
+        </div>
+
+        <input type="hidden" asp-for="@Model.ChosenTab" value=@Model.ChosenTab />
+
+        @for (var i = 0; i < Model.Civilization.Count; i++)
+        {
+            <input type="hidden" asp-for="@Model.Civilization[i].Id" value=@Model.Civilization[i].Id />
+            <input type="hidden" asp-for="@Model.Civilization[i].Leader" value=@Model.Civilization[i].Leader />
+            <input type="hidden" asp-for="@Model.Civilization[i].Name" value=@Model.Civilization[i].Name />
+        }
+
+        @for (var i = 0; i < Model.MapType.Count; i++)
+        {
+            <input type="hidden" asp-for="@Model.MapType[i].Id" value=@Model.MapType[i].Id />
+            <input type="hidden" asp-for="@Model.MapType[i].Name" value=@Model.MapType[i].Name />
+        }
+
+        @for (var i = 0; i < Model.MapSize.Count; i++)
+        {
+            <input type="hidden" asp-for="@Model.MapSize[i].Id" value=@Model.MapSize[i].Id />
+            <input type="hidden" asp-for="@Model.MapSize[i].MaxCivilizations" value=@Model.MapSize[i].MaxCivilizations />
+            <input type="hidden" asp-for="@Model.MapSize[i].Name" value=@Model.MapSize[i].Name />
+        }
+
+        @for (var i = 0; i < Model.Difficulty.Count; i++)
+        {
+            <input type="hidden" asp-for="@Model.Difficulty[i].Id" value=@Model.Difficulty[i].Id />
+            <input type="hidden" asp-for="@Model.Difficulty[i].Name" value=@Model.Difficulty[i].Name />
+            <input type="hidden" asp-for="@Model.Difficulty[i].Type" value=@Model.Difficulty[i].Type />
+        }
+
+        @for (var i = 0; i < Model.VictoryType.Count; i++)
+        {
+            <input type="hidden" asp-for="@Model.VictoryType[i].Id" value=@Model.VictoryType[i].Id />
+            <input type="hidden" asp-for="@Model.VictoryType[i].Name" value=@Model.VictoryType[i].Name />
+        }
+
+        @for (var i = 0; i < Model.AdvancedGameOptions.Count; i++)
+        {
+            <input type="hidden" asp-for="@Model.AdvancedGameOptions[i]" value=@Model.AdvancedGameOptions[i] />
+        }
+
+        @* Civilization *@
+        @if (Model.ChosenTab == "Civilization")
+        {
+            <div class="col-md-9 col-sm-8 form-horizontal">
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <label class="control-label">Name</label>
+                    </div>
+                    <div class="col-md-9">
+                        <input asp-for="@Model.ChosenName" type="text" class="form-control" value=@Model.ChosenName />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <label class="control-label">Civilization</label>
+                    </div>
+                    <div class="col-md-9">
+                        <select asp-for="@Model.ChosenCivilization" class="form-control">
+                            <option selected="@(Model.ChosenCivilization == null)">Random civilization</option>
+                            @foreach (var civilization in Model.Civilization)
+                            {
+                                <option selected="@(Model.ChosenCivilization != null && civilization.Id == Model.ChosenCivilization)" value=@civilization.Id>@civilization.Leader (@civilization.Name)</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <input type="hidden" asp-for="@Model.ChosenName" value=@Model.ChosenName />
+            <input type="hidden" asp-for="@Model.ChosenCivilization" value=@Model.ChosenCivilization />
+        }
+
+        @* Opponents *@
+        @if (Model.ChosenTab == "Opponents")
+        {
+            <div class="col-md-9 col-sm-8 form-horizontal">
+                @for (var i = 0; i < Model.ChosenOpponents.Count; i++)
+                {
+                    <div class="form-group">
+                        <div class="col-md-3">
+                            <label class="control-label">Opponent @(i + 1)</label>
+                            <button asp-action="SetUpGame" asp-route-removeIndex="@i" type="submit" name="Action" value="Remove" class="btn btn-link">Remove</button>
+                        </div>
+                        <div class="col-md-9">
+                            <select asp-for="@Model.ChosenOpponents[i]" class="form-control">
+                                <option selected="@(Model.ChosenOpponents[i] == null)" value=@null>Random civilization</option>
+                                @foreach (var civilization in Model.Civilization)
+                                {
+                                    <option selected="@(Model.ChosenOpponents[i] != null && civilization.Id == Model.ChosenOpponents[i])" value=@civilization.Id>@civilization.Leader (@civilization.Name)</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                }
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <button asp-action="SetUpGame" type="submit" name="Action" value="Add" class="btn btn-default">Add</button>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            @if (Model.ChosenOpponents != null)
+            {
+                @for (var i = 0; i < Model.ChosenOpponents.Count; i++)
+                {
+                    <input type="hidden" asp-for="@Model.ChosenOpponents[i]" value=@Model.ChosenOpponents[i] />
+                }
+            }
+        }
+
+        @* Basic settings *@
+        @if (Model.ChosenTab == "BasicSettings")
+        {
+            <div class="col-md-9 col-sm-8 form-horizontal">
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <label class="control-label">Map type</label>
+                    </div>
+                    <div class="col-md-9">
+                        @foreach (var type in Model.MapType)
+                        {
+                            <div class="radio">
+                                @Html.RadioButtonFor(model => model.ChosenMapType, type.Id)
+                                <label>@type.Name</label>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <label class="control-label">Map size</label>
+                    </div>
+                    <div class="col-md-9">
+                        @foreach (var size in Model.MapSize)
+                        {
+                            <div class="radio">
+                                @Html.RadioButtonFor(model => model.ChosenMapSize, size.Id)
+                                <label>@size.Name (@size.MaxCivilizations)</label>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <label class="control-label">Difficulty</label>
+                    </div>
+                    <div class="col-md-9">
+                        @foreach (var difficulty in Model.Difficulty)
+                        {
+                            <div class="radio">
+                                @Html.RadioButtonFor(model => model.ChosenDifficulty, difficulty.Id)
+                                <label>@difficulty.Name - @difficulty.Type</label>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <input type="hidden" asp-for="@Model.ChosenMapType" value=@Model.ChosenMapType />
+            <input type="hidden" asp-for="@Model.ChosenMapSize" value=@Model.ChosenMapSize />
+            <input type="hidden" asp-for="@Model.ChosenDifficulty" value=@Model.ChosenDifficulty />
+        }
+
+        @* Advanced settings *@
+        @if (Model.ChosenTab == "AdvancedSettings")
+        {
+            <div class="col-md-9 col-sm-8 form-horizontal">
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <label class="control-label">Victory types</label>
+                    </div>
+                    <div class="col-md-9">
+                        @for (var i = 0; i < Model.VictoryType.Count; i++)
+                        {
+                            <div class="checkbox">
+                                @Html.CheckBoxFor(model => model.ChosenVictoryType[i])
+                                <label>@Model.VictoryType[i].Name</label>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <label class="control-label">Advanced game options</label>
+                    </div>
+                    <div class="col-md-9">
+                        @for (var i = 0; i < Model.AdvancedGameOptions.Count; i++)
+                        {
+                            <div class="checkbox">
+                                @Html.CheckBoxFor(model => model.ChosenAdvancedGameOptions[i])
+                                <label>@Model.AdvancedGameOptions[i]</label>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            @for (var i = 0; i < Model.ChosenVictoryType.Count; i++)
+            {
+                <input type="hidden" asp-for="@Model.ChosenVictoryType[i]" value=@Model.ChosenVictoryType[i] />
+            }
+
+            @for (var i = 0; i < Model.ChosenAdvancedGameOptions.Count; i++)
+            {
+                <input type="hidden" asp-for="@Model.ChosenAdvancedGameOptions[i]" value=@Model.ChosenAdvancedGameOptions[i] />
+            }
+        }
+    </div>
+</form>
