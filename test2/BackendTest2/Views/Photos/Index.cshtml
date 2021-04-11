@@ -1,0 +1,31 @@
+﻿@model IEnumerable<BackendTest2.Models.Photo>
+@{
+    ViewBag.Title = "All Photos";
+}
+
+<h1>
+    Photos @if (ViewBag.Tag != null)
+    {<span>#@ViewBag.Tag</span>} @if (ViewBag.User != null)
+    {<span>by @ViewBag.User</span>}
+</h1>
+<div class="row">
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="col-xs-6 col-md-3">
+            <a asp-action="Create" class="thumbnail new-image">
+                <div>
+                    + Upload
+                </div>
+            </a>
+        </div>
+    }
+
+    @foreach (var item in Model)
+    {
+        <div class="col-xs-6 col-md-3">
+            <a asp-action="Details" asp-route-id="@item.Id" class="thumbnail image">
+                <img src="@item.Path" alt="@item.Name" title="@item.Name" class="img-responsive" />
+            </a>
+        </div>
+    }
+</div>

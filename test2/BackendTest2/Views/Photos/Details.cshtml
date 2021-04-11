@@ -1,0 +1,66 @@
+﻿@model BackendTest2.Models.Photo
+@{
+    ViewData["Title"] = Model.Name + " by " + Model.User.UserName;
+}
+
+<h1>@Model.Name<small> by <a asp-action="Index" asp-route-userId="@Model.UserId">@Model.User.UserName</a></small></h1>
+<p>
+    <a asp-action="Index" class="btn btn-default">Back</a>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-default">Edit</a>
+    <a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-default">Delete</a>
+</p>
+
+<div class="row">
+    <div class="col-md-9">
+        <div class="thumbnail">
+            <img src="@Model.Path" alt="@Model.Name" title="@Model.Name" />
+        </div>
+        <div class="row">
+            <div class="col-md-9">
+                <p>@Model.Description</p>
+                <p>
+                    @foreach (var item in Model.Tags)
+                    {
+                        <a asp-action="Index" asp-route-tagId="@item.TagId">#toChangeLater</a>
+                    }
+                </p>
+            </div>
+            <div class="col-md-3 text-right">
+                <strong>@Model.Likes likes</strong>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <form asp-action="Details" asp-route-id="@Model.Id">
+                        <button type="submit" class="btn btn-primary">Like</button>
+                    </form>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        @if (User.Identity.IsAuthenticated)
+        {
+            <form asp-action="Create" asp-controller="Comments">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <div class="panel-title">Add comment</div>
+                    </div>
+                    <div class="panel-body text-right">
+                        <textarea style="width: 100%; max-width: 100%;"></textarea>
+                        <button class="btn btn-sm btn-primary">Add</button>
+                    </div>
+                </div>
+            </form>
+        }
+
+        @foreach (var item in Model.Comments)
+        {
+            <div class="panel panel-default">
+                <div class="panel-heading"><a href="#">@item.User.UserName</a> commented on @item.Created</div>
+                <div class="panel-body">@item.Text</div>
+                <div class="panel-footer text-right">
+                    <button asp-action="Delete" asp-controller="Comments" asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>

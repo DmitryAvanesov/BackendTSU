@@ -1,0 +1,17 @@
+﻿@model dynamic
+@{
+    ViewBag.Title = "Mockups";
+}
+
+<h1>Mockups</h1>
+
+<ul>
+    <li><a asp-action="AllPhotos">Photos List (All)</a></li>
+    <li><a asp-action="TaggedPhotos">Photos List (By Tag)</a></li>
+    <li><a asp-action="UserPhotos">Photos List (By User)</a></li>
+    <li><a asp-action="PhotosAndCreate">Photos List (With Create)</a></li>
+    <li><a asp-action="Details">Single Photo (Anonymous)</a></li>
+    <li><a asp-action="DetailsAuthenticated">Single Photo (Authenticated)</a></li>
+    <li><a asp-action="DetailsCanManage">Single Photo (Owner / Administrator)</a></li>
+    <li><a asp-action="Delete">Delete Photo</a></li>
+</ul>
