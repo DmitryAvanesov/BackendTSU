@@ -1,0 +1,27 @@
+﻿@model Backend2.Models.CalculatorViewModel
+@{
+    ViewBag.Title = "Calculator (Model binding in separate model)";
+}
+
+<h2>Calculator (Model binding in separate model)</h2>
+
+<form asp-action="ModelBindingInSeparateModel">
+    <div class="form-group">
+        <input asp-for="FirstInt" type="number" name="FirstInt" class="form-control" />
+        <span asp-validation-for="FirstInt" class="field-validation-error"></span>
+
+        <select asp-for="ArithmeticOperator" name="ArithmeticOperator">
+            <option value="0">+</option>
+            <option value="1">-</option>
+            <option value="2">*</option>
+            <option value="3">/</option>
+        </select>
+
+        <input asp-for="SecondInt" type="number" name="SecondInt" class="form-control" />
+        <span asp-validation-for="SecondInt" class="field-validation-error"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+
+    <span>= @Model.Result</span>
+</form>

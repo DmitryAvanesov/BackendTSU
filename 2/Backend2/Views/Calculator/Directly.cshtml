@@ -1,0 +1,44 @@
+﻿@model dynamic
+@{
+    ViewBag.Title = "Calculator (Directly)";
+}
+
+<h2>Calculator (Directly)</h2>
+
+<form asp-action="Directly">
+    <div class="form-group">
+        @if (@ViewBag.ErrorFirst == null)
+        {
+            <input type="number" name="FirstInt" class="form-control" value="@ViewBag.FirstInt" />
+        }
+        else
+        {
+            <input type="number" name="FirstInt" class="form-control input-validation-error" value="@ViewBag.FirstInt" />
+            <span class="field-validation-error">@ViewBag.ErrorFirst</span>
+        }
+
+        <select name="ArithmeticOperator">
+            <option value="0">+</option>
+            <option value="1">-</option>
+            <option value="2">*</option>
+            <option value="3">/</option>
+        </select>
+
+        @if (@ViewBag.ErrorSecond == null)
+        {
+            <input type="number" name="SecondInt" class="form-control" value="@ViewBag.SecondInt" />
+        }
+        else
+        {
+            <input type="number" name="SecondInt" class="form-control input-validation-error" value="@ViewBag.SecondInt" />
+            <span class="field-validation-error">@ViewBag.ErrorSecond</span>
+        }
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit</button>
+
+    @if (@ViewBag.ErrorFirst == null && ViewBag.ErrorSecond == null && ViewBag.Result != null)
+    {
+        <span>= @ViewBag.Result</span>
+    }
+</form>
